@@ -1,34 +1,28 @@
-import {
-  BrowserRouter as Router, 
-  Routes,
-  Route
-} from "react-router-dom";
 
-
+import { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
-import SongList from './pages/SongList';
-import Song from './pages/Song';
+import SongList from './components/SongList';
+import SongData from './data/SongData';
+
+
 
 function App() { 
-  return (
-    <Router>  
-      <div className="container">
-        
-      
-      <div className="app">
-        
-   
-      <Header />  
-      <Routes>  
-        <Route path="/" exact element={<SongList />} />  
-        <Route path="/song/:id" element={<Song />} />
-   
-      </Routes>  
-      </div>
-      </div>
-    </Router> 
+  const [song, setSong] = useState(SongData)
 
+
+
+
+  return (
+     <>
+    <Header />  
+      <div className="song">
+       {/* passing song props to SongList  - goto SongList*/}
+      <SongList song={song}/>
+        
+      </div>
+
+      </>
   );
 }
 

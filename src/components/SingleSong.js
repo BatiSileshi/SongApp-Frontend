@@ -1,13 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
 
-const SingleSong = ({song}) => {
+// taking item as props
+const SingleSong = ({item}) => {
   return (
-    <div>
-      <h3>{song.song_title}</h3>
-      <Link to={`/song/${song.id}`}>
-      <button>Update</button>
-      </Link>
+    <div className='card'>
+      <div>{item.song_title}</div>
+      <div>{item.album}</div>
+      <div>{item.artist_name}</div>
     </div>
   )
 } 
