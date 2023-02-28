@@ -6,7 +6,7 @@ const SingleSong = ({song}) => {
     <div>
       <h3>{song.song_title}</h3>
       <Link to={`/song/${song.id}`}>
-      <p>Update</p>
+      <button>Update</button>
       </Link>
     </div>
   )

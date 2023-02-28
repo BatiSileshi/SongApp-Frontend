@@ -34,10 +34,6 @@ const Song = ({ history }) => {
     };
 
 
-
-
-
-
   return (
     <div>
       <p>{ song?.song_title } </p>
