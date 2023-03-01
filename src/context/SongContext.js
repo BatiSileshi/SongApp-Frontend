@@ -1,41 +1,68 @@
-import { v4 as uuidv4 } from 'uuid'
-import { createContext, useState
+
+import { createContext, useState, useEffect
  } from "react";
 
  const SongContext = createContext()
 
  export const SongProvider = ({children})=>{
-    const [song, setSong]=useState([
-        {
-            id: 1,
-            song_title: 'Oh Lord',
-            album: 5,
-            artist_name: "me"
-        }
-    ])
+    const [song, setSong]=useState([])
 
     const [songEdit, setSongEdit] = useState({
         item: {},
         edit: false
       })
 
-    const addSong = (newSong) => {
-        newSong.id = uuidv4()
-        setSong([newSong, ...song])
+      useEffect(() =>{
+        fetchSong()
+      }, [])
+
+      // fetching data
+    const fetchSong = async ()=>{
+        const response = await fetch (`/api/songs?_sort=id$_order=desc/`)
+
+        const data = await response.json()
+        setSong(data)
+    }
+
+    const addSong = async (newSong) => {
+        const response = await fetch('/api/songs/add/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify(newSong)
+        })
+        const data = await response.json()
+        setSong([data, ...song])
       }
 
 
-    const deleteSong = (id) => {
+    const deleteSong = async(id) => {
         if(window.confirm('Are you sure you want to delete?')){
+
+          await fetch(`/api/songs/${id}/delete/`,
+          {method: 'DELETE'}
+          )
           setSong(song.filter((item) => item.id !== id));
         }
     }
       
 
     //update song 
-    const updateSong = (id, updItem) => {
+    const updateSong = async(id, updItem) => {
+
+        const response = await fetch (`/api/songs/${id}/update/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updItem)
+        })
+
+        const data = await response.json()
+
         setSong(
-            song.map((item) => (item.id === id ? {...item, ...updItem} : item))
+            song.map((item) => (item.id === id ? {...item, ...data} : item))
         )
     }
 
