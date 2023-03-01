@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect} from "react"
+import { useNavigate } from 'react-router-dom'
 import SongContext from "../context/SongContext";
 import Container from './Container'
 import styled from '@emotion/styled'
@@ -30,6 +31,8 @@ cursor: pointer;
 
 
 function SongForm() {
+ 
+
     const [song_title, setTitle]=useState('')
     const [album, setAlbum]=useState('')
     const [artist_name, setArtist]=useState('')
@@ -47,7 +50,8 @@ function SongForm() {
         setArtist(songEdit.item.artist_name)
       }
     }, [songEdit])
-
+    
+    const navigate = useNavigate();
 
 
     const handleSongTitleChange = (e)=> {
@@ -102,12 +106,18 @@ function SongForm() {
         }
         
 
+
         setTitle('')
         setAlbum('')
         setArtist('')
+        
+        navigate('/');
       }
+      
        
     }
+    
+    
 
   return (
     <Container >

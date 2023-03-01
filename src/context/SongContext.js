@@ -4,7 +4,7 @@ import { createContext, useState, useEffect
 
  const SongContext = createContext()
 
- export const SongProvider = ({children})=>{
+ export const SongProvider = ({children, history})=>{
     const [song, setSong]=useState([])
 
     const [songEdit, setSongEdit] = useState({
@@ -34,6 +34,7 @@ import { createContext, useState, useEffect
         })
         const data = await response.json()
         setSong([data, ...song])
+
       }
 
 

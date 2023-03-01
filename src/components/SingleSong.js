@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import SongContext from '../context/SongContext'
 import styled from '@emotion/styled'
 import Container from './Container'
-
+import { Link } from 'react-router-dom'
 import {
   Box,
   Card,
@@ -11,11 +11,14 @@ import {
   Text,
 } from 'rebass'
 
+
+
 const Button = styled.button`
    color: red;
    float: right;
    margin-left: 8px;
 `
+
 
 // taking item as props
 const SingleSong = ({item}) => {
@@ -37,9 +40,9 @@ const SingleSong = ({item}) => {
 <Button onClick={() => deleteSong(item.id)}> 
       <FaTimes />
       </Button>
-      <Button onClick={() => editSong(item)}>
-        <FaEdit/>
-      </Button>
+      <Link to='songs/add' onClick={() => editSong(item)}>
+        <Button><FaEdit/></Button>
+      </Link>
 
   <Heading paddingBottom={2} paddingLeft={2}>{item.song_title}</Heading>
 
