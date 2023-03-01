@@ -1,12 +1,27 @@
-import { useState } from "react"
+import { useState, useContext, useEffect} from "react"
+import SongContext from "../context/SongContext"
 
-function SongForm({handleAdd}) {
+function SongForm() {
     const [song_title, setTitle]=useState('')
     const [album, setAlbum]=useState('')
     const [artist_name, setArtist]=useState('')
 
     const [btnDisabled, setBtnDisabled]=useState(true)
     const [message, setMessage]=useState()
+
+
+    const {addSong, songEdit, updateSong} = useContext(SongContext)
+
+    useEffect(() => {
+      if( songEdit.edit === true){
+        setBtnDisabled(false)
+        setTitle(songEdit.item.song_title)
+        setAlbum(songEdit.item.album)
+        setArtist(songEdit.item.artist_name)
+      }
+    }, [songEdit])
+
+
 
     const handleSongTitleChange = (e)=> {
         if (song_title === ''){
@@ -53,7 +68,12 @@ function SongForm({handleAdd}) {
           artist_name
 
         }
-        handleAdd(newSong)
+        if(songEdit.edit === true){
+          updateSong(songEdit.item.id, newSong);
+        }else{
+          addSong(newSong)
+        }
+        
 
         setTitle('')
         setAlbum('')
@@ -72,7 +92,7 @@ function SongForm({handleAdd}) {
 
             <input onChange={handleSongArtistChange} type="text" name="" placeholder='Artist name' value={artist_name} />
 
-            <button type="submit" isdisabled={btnDisabled}>Save</button>
+            <button type="submit" isDisabled={btnDisabled}>Save</button>
         </div>
 
         {message && <div className="message">{message} </div>}
