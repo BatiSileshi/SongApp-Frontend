@@ -1,11 +1,38 @@
 import { useState, useContext, useEffect} from "react"
-import SongContext from "../context/SongContext"
+import SongContext from "../context/SongContext";
+import Container from './Container'
+import styled from '@emotion/styled'
+import {
+  Box,
+  Flex,
+} from 'rebass'
+
+import {
+  Label,
+  Input,
+} from '@rebass/forms'; 
+
+
+
+const Button = styled.button`
+width: 50%;
+background-color: gray;
+color: white;
+padding: 10px;
+margin-top: 10px;
+margin-left: 10px;
+float: center;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+`
+
+
 
 function SongForm() {
     const [song_title, setTitle]=useState('')
     const [album, setAlbum]=useState('')
     const [artist_name, setArtist]=useState('')
-
     const [btnDisabled, setBtnDisabled]=useState(true)
     const [message, setMessage]=useState()
 
@@ -83,21 +110,49 @@ function SongForm() {
     }
 
   return (
-    <div className='song'>
-      <form onSubmit={handleSubmit}>
-        <div>
-            <input onChange={handleSongTitleChange} type="text" name="" placeholder='Song title' value={song_title}/>
+    <Container >
+<Box
+  as='form'
+  onSubmit={handleSubmit}
+  py={3}>
+  <Flex mx={-2} mb={3} flexWrap='wrap'>
+    <Box width={1} px={2} mt={3}  >
+      <Label htmlFor='song_title'>Song Title</Label>
+      <Input
+        type='text'
+        value={song_title}
+        onChange={handleSongTitleChange}
+      />
+      
+    </Box>
+    
+    <Box width={1} px={2} mt={3} >
+      <Label htmlFor='album'>Album</Label>
+      <Input
+        type='text'
+        value={album}
+        onChange={handleSongAlbumChange}
+      />
+    </Box>
 
-            <input onChange={handleSongAlbumChange} type="text" name="" placeholder='Song album' value={album}/>
+    <Box width={1} px={2} mt={3} >
+      <Label htmlFor='artist_name'>Artist Name</Label>
+      <Input
+        type='text'
+        value={artist_name}
+        onChange={handleSongArtistChange}
+      />
+    </Box>
 
-            <input onChange={handleSongArtistChange} type="text" name="" placeholder='Artist name' value={artist_name} />
+    <Box   width={1/2}  >
+      
+    <Button type="submit" isDisabled={btnDisabled}>Save</Button>
+    </Box>
 
-            <button type="submit" isDisabled={btnDisabled}>Save</button>
-        </div>
-
-        {message && <div className="message">{message} </div>}
-      </form>
-    </div>
+  </Flex>
+  {message && <div className="message">{message} </div>}
+</Box>
+    </Container>
   )
 }
 

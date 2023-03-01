@@ -11,8 +11,6 @@ import {
   Text,
 } from 'rebass'
 
-
-
 const Button = styled.button`
    color: red;
    float: right;

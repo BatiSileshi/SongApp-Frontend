@@ -8,7 +8,7 @@ function SongStats() {
 
   return (
     <Container>
-      <h4>{song.length} song</h4>
+      <h4>{song.length} songs</h4>
     </Container>
   )
 }
