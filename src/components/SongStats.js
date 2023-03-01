@@ -1,15 +1,15 @@
 import React from 'react'
 import { useContext } from 'react';
 import SongContext from '../context/SongContext';
-
+import Container from './Container'
 
 function SongStats() {
   const {song} =useContext(SongContext)
 
   return (
-    <div>
-      <h4>{song.length} songs</h4>
-    </div>
+    <Container>
+      <h4>{song.length} song</h4>
+    </Container>
   )
 }
 

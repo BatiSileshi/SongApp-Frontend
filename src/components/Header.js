@@ -1,12 +1,25 @@
 import React from 'react'
 
+import {
+Text,
+Box,
+Flex,
+} from 'rebass'
+
+
 const Header = () => {
   return (
     <header>
-      <div className='container'>
-      <h1>SongApp</h1>
-      <hr></hr>
-      </div>
+
+  <Flex
+  color='white'
+  bg='gray'
+  height={60}
+  alignItems='center'>
+  <Text p={2} fontWeight='bold' fontSize={25} paddingLeft={80}>SongApp</Text>
+  <Box mx='auto' />
+
+</Flex>
 
     </header>
   )

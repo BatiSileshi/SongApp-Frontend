@@ -11,6 +11,7 @@ function App() {
 
 
   return (
+
      <SongProvider>
     <Header />  
       <div className="song">
@@ -22,6 +23,7 @@ function App() {
       </div>
 
       </SongProvider>
+     
   );
 }
 
