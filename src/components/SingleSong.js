@@ -40,15 +40,14 @@ const SingleSong = ({item}) => {
 <Button onClick={() => deleteSong(item.id)}> 
       <FaTimes />
       </Button>
-      <Link to='songs/add' onClick={() => editSong(item)}>
+      <Link to='songs/action' onClick={() => editSong(item)}>
         <Button><FaEdit/></Button>
       </Link>
 
-  <Heading paddingBottom={2} paddingLeft={2}>{item.song_title}</Heading>
+  <Heading  fontSize={4} paddingBottom={2} paddingLeft={2}>{item.song_title}</Heading>
 
-      <Text paddingBottom={1} paddingLeft={2}>{item.album}</Text>
-      <Text fontSize={2} paddingLeft={2}>
-      {item.artist_name}
+      <Text paddingBottom={1} paddingLeft={2} fontSize={2}> {item.album}</Text>
+      <Text fontSize={1} paddingLeft={2}> By {item.artist_name}
       </Text>
 </Card>
 </Box>

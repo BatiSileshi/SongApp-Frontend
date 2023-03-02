@@ -92,7 +92,7 @@ function SongForm() {
 
     const handleSubmit=(e) => {
       e.preventDefault()
-      if (song_title !== ''){
+      if (song_title !== '' && artist_name !== ''){
         const newSong = {
           song_title,
           album,
@@ -105,8 +105,6 @@ function SongForm() {
           addSong(newSong)
         }
         
-
-
         setTitle('')
         setAlbum('')
         setArtist('')
@@ -133,11 +131,10 @@ function SongForm() {
         value={song_title}
         onChange={handleSongTitleChange}
       />
-      
     </Box>
     
     <Box width={1} px={2} mt={3} >
-      <Label htmlFor='album'>Album</Label>
+      <Label htmlFor='album'>Album (optional)</Label>
       <Input
         type='text'
         value={album}
