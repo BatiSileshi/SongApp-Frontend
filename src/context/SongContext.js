@@ -34,7 +34,7 @@ import { createContext, useState, useEffect
             body: JSON.stringify(newSong)
         })
         const data = await response.json()
-        setSong([data, ...song])
+        setSong((song)=>[data, ...song])
         
       }
 
@@ -91,5 +91,6 @@ import { createContext, useState, useEffect
 
     </SongContext.Provider>
  }
+
 
 export default SongContext
