@@ -52,9 +52,10 @@ const SingleSong = ({item}) => {
       <Link to={`songs/${item.id}/update`} onClick={() => editSong(item)}>
         <Button><FaEdit/></Button>
       </Link>
-      <div>
+      
+      <div> 
     <Image src={`static/images/${item.cover_image}`} alt='Cover Image of the song will be shown here' />
-    </div>
+      </div> 
 
   <Heading  fontSize={4} paddingBottom={2} paddingLeft={2}   css={{
     wordWrap: 'break-word', overflowWrap: 'break-word', maxWidth: '80%' 

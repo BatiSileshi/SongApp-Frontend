@@ -8,8 +8,6 @@ import Container from './Container';
 
 
 
-
-
 function SongList() {
 
   const {song} =useContext(SongContext)
@@ -19,8 +17,6 @@ function SongList() {
 
 
   return (
-
-
     <div className='song-list'>
 
       <AnimatePresence>
