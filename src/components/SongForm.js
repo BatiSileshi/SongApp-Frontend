@@ -37,6 +37,7 @@ function SongForm() {
     const [album, setAlbum]=useState('')
     const [artist_name, setArtist]=useState('')
     const [btnDisabled, setBtnDisabled]=useState(true)
+    const [cover_image, setImage] = useState(null)
     const [message, setMessage]=useState()
 
 
@@ -90,32 +91,50 @@ function SongForm() {
         setArtist(e.target.value)
     }
 
+    const handleImageChange = (e) => {
+      setImage(e.target.files[0])
+  }
+
+
     const handleSubmit=(e) => {
       e.preventDefault()
-      if (song_title !== '' && artist_name !== ''){
-        const newSong = {
-          song_title,
-          album,
-          artist_name
+      if (song_title !== "" && artist_name !== "") {
+        const formData = new FormData();
+        formData.append("song_title", song_title);
+        formData.append("album", album);
+        formData.append("artist_name", artist_name);
+        formData.append("cover_image", cover_image);
 
+        try {
+          if (songEdit.edit === true) {
+            updateSong(songEdit.item.id, formData);
+          } else {
+            addSong(formData);
+          }
+          setTitle("");
+          setAlbum("");
+          setArtist("");
+          setImage(null);
+          navigate("/");
+        } catch (error) {
+          console.error(error);
+          setMessage("Error saving song. Please try again.");
         }
-        if(songEdit.edit === true){
-          updateSong(songEdit.item.id, newSong);
-        }else{
-          addSong(newSong)
-        }
-        
-        setTitle('')
-        setAlbum('')
-        setArtist('')
-        
-        navigate('/');
+        fetch("/api/songs/add/", {
+          method: "POST",
+          body: formData,
+        }).then(() => {
+          // handle success
+        }).catch((error) => {
+          // handle error
+        });
+
+    
+      } else {
+        setMessage("Please fill all required fields.");
       }
-      
-       
     }
-    
-    
+
 
   return (
     <Container >
@@ -150,6 +169,12 @@ function SongForm() {
         onChange={handleSongArtistChange}
       />
     </Box>
+
+    <Box width={1} px={2} mt={3}>
+        <Label htmlFor="cover_image">Cover Image</Label>
+        <Input type="file" onChange={handleImageChange} />
+      </Box>
+
 
     <Box   width={1/2}  >
       
