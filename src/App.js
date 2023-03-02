@@ -4,6 +4,7 @@ import Header from './components/Header';
 import SongList from './components/SongList';
 import SongStats from './components/SongStats';
 import Form from './pages/Form';
+import UpdateForm from './pages/UpdateForm';
 import { SongProvider } from './context/SongContext'; 
 
 
@@ -29,8 +30,8 @@ function App() {
 
       </Route>
 
-      <Route path ='/songs/action' element={<Form/>}/>
-      
+      <Route path ='/songs/add' element={<Form/>}/>
+      <Route path ='/songs/:id/update' element={<UpdateForm/>}/>
       </Routes>
      
       </div>

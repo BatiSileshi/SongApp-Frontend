@@ -14,6 +14,15 @@ import {
 } from '@rebass/forms'; 
 
 
+const Image = styled.img`
+  width: 70px;
+  max-height: 100px;
+  margin-bottom: 8px;
+  margin-top: 1px;
+  padding:6px;
+  padding-right:9;
+  float: left;
+`
 
 const Button = styled.button`
 width: 50%;
@@ -167,7 +176,7 @@ function SongForm() {
       <Label htmlFor='song_title'>Song Title</Label>
       <Input
         type='text'
-       
+        value={song_title}
         onChange={handleSongTitleChange}
       />
     </Box>
@@ -176,7 +185,7 @@ function SongForm() {
       <Label htmlFor='album'>Album (optional)</Label>
       <Input
         type='text'
-        
+        value={album}
         onChange={handleSongAlbumChange}
       />
     </Box>
@@ -185,12 +194,16 @@ function SongForm() {
       <Label htmlFor='artist_name'>Artist Name</Label>
       <Input
         type='text'
-       
+        value={artist_name}
         onChange={handleSongArtistChange}
       />
     </Box>
 
     <Box width={1} px={2} mt={3}>
+    
+    {songEdit.edit && songEdit.item.cover_image && (    
+    <Image src={`/static/images/${songEdit.item.cover_image}`} alt={songEdit.item.cover_image} /> 
+  )}   
     
      <Label htmlFor="cover_image">Cover Image</Label>
         <Input type="file" onChange={handleImageChange} />

@@ -19,7 +19,7 @@ function SongStats() {
   if (song.length === 1){
     return  <Container><h4>{song.length} song</h4>
              
-       <Link to='/songs/action'>
+       <Link to='/songs/add'>
          <Button > <FaPlus/></Button>
        </Link>
 
@@ -30,7 +30,7 @@ function SongStats() {
     <Container>
 
       <h4>{song.length} songs</h4>
-       <Link to='/songs/action'>
+       <Link to='/songs/add'>
          <Button > <FaPlus/></Button>
        </Link>
 

@@ -18,7 +18,15 @@ const Button = styled.button`
    float: right;
    margin-left: 8px;
 `
-
+const Image = styled.img`
+  width: 70px;
+  max-height: 100px;
+  margin-bottom: 8px;
+  margin-top: 1px;
+  padding:6px;
+  padding-right:9;
+  float: left;
+`
 
 // taking item as props
 const SingleSong = ({item}) => {
@@ -29,8 +37,9 @@ const SingleSong = ({item}) => {
   return (
 
 <Container>
-<Box width={400} height={100}>
+<Box width={400} height={140}>
 <Card margin={1}       sx={{
+        height:120,
         p: 1,
         borderRadius: 3,
         boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
@@ -39,22 +48,25 @@ const SingleSong = ({item}) => {
 
 <Button onClick={() => deleteSong(item.id)}> 
       <FaTimes />
-      </Button>
-      <Link to='songs/action' onClick={() => editSong(item)}>
+      </Button> 
+      <Link to={`songs/${item.id}/update`} onClick={() => editSong(item)}>
         <Button><FaEdit/></Button>
       </Link>
+      <div>
+    <Image src={`static/images/${item.cover_image}`} alt='Cover Image of the song will be shown here' />
+    </div>
 
-  <Heading  fontSize={4} paddingBottom={2} paddingLeft={2}>{item.song_title}</Heading>
+  <Heading  fontSize={4} paddingBottom={2} paddingLeft={2}   css={{
+    wordWrap: 'break-word', overflowWrap: 'break-word', maxWidth: '80%' 
+  }} >{item.song_title} </Heading>
 
       <Text paddingBottom={1} paddingLeft={2} fontSize={2}> {item.album}</Text>
       <Text fontSize={1} paddingLeft={2}> By {item.artist_name}
       </Text>
+      
 </Card>
 </Box>
-      
-     
-      
-      
+         
 </Container>
 
 
