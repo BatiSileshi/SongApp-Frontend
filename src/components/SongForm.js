@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect} from "react"
+import { useState, useContext} from "react"
 import { useNavigate } from 'react-router-dom'
 import SongContext from "../context/SongContext";
 import Container from './Container'
@@ -41,16 +41,9 @@ function SongForm() {
     const [message, setMessage]=useState()
 
 
-    const {songEdit, updateSong} = useContext(SongContext)
+    const {addSong} = useContext(SongContext)
 
-    useEffect(() => {
-      if( songEdit.edit === true){
-        setBtnDisabled(false)
-        setTitle(songEdit.item.song_title)
-        setAlbum(songEdit.item.album)
-        setArtist(songEdit.item.artist_name)
-      }
-    }, [songEdit])
+
     
     const navigate = useNavigate();
 
@@ -98,8 +91,9 @@ function SongForm() {
 
     const handleSubmit= async (e) => {
       e.preventDefault()
+      const formData = new FormData();
       if (song_title !== "" && song_title.length <25 && artist_name !== "" && artist_name.length <20 && album.length <20 ) {
-        const formData = new FormData();
+        
         formData.append("song_title", song_title);
         formData.append("album", album || '');
         formData.append("artist_name", artist_name);
@@ -110,51 +104,24 @@ function SongForm() {
           formData.append("cover_image", cover_image);
         }
 
-        try {
-          if (songEdit.edit === true) {
-            const response = await fetch(`/api/songs/${songEdit.item.id}/update/`, {
-              method: "PUT",
-              body: formData,
-            });
-            if (response.ok) {
-              updateSong(songEdit.item.id, formData);
-              setTitle("");
-              setAlbum("");
-              setArtist("");
-              setImage(null);
-              navigate("/");
-            } else {
-              setMessage("Error updating song. Please try again.");
-            }
-          } else {
-           
-         
-           fetch("/api/songs/add/", {
+        
+          // await addSong(formData)
+          fetch("/api/songs/add/", {
             method: "POST",
             body: formData,
           })
-            .then(() => {
-              // handle success
-            })
-            .catch((error) => {
-              // handle error
-            }); 
+        addSong(formData)
 
-          }
-          setTitle("");
-          setAlbum("");
-          setArtist("");
-          setImage(null);
-          navigate("/");
-        } catch (error) {
-          console.error(error);
-          setMessage("Error saving song. Please try again.");
-        }
-      } else {
-        setMessage("Please fill all fields correctly.");
+        setTitle("")
+        setAlbum("")
+        setArtist("")
+        setImage(null)
+        setMessage(null)
+        navigate("/");
+    
       }
-    }
 
+    }
 
   return (
     <Container >
@@ -167,7 +134,7 @@ function SongForm() {
       <Label htmlFor='song_title'>Song Title</Label>
       <Input
         type='text'
-       
+         
         onChange={handleSongTitleChange}
       />
     </Box>

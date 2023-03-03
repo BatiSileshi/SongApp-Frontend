@@ -13,28 +13,30 @@ import { createContext, useState, useEffect
         edit: false
       })
 
-      useEffect(() =>{
-        fetchSong()
-      }, [])
 
-      // fetching data
-    const fetchSong = async ()=>{
-        const response = await fetch (`/api/songs/`)
+      useEffect(() => {
+        const fetchSong = async () => {
+            const response = await fetch('/api/songs/');
+            const data = await response.json();
+            setSong(data);
+        };
+        fetchSong();
+    }, []);
 
-        const data = await response.json()
-        setSong(data)
-    }
 
-    const addSong = async (newSong) => {
+
+
+
+    const addSong = async (formData) => {
         const response = await fetch('/api/songs/add/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             }, 
-            body: JSON.stringify(newSong)
+            body: formData
         })
         const data = await response.json()
-        setSong((song)=>[data, ...song])
+        setSong([...song, data])
         
       }
 

@@ -19,9 +19,7 @@ function SongStats() {
   if (song.length === 1){
     return  <Container><h4>{song.length} song</h4>
              
-       <Link to='/songs/add'>
-         <Button > <FaPlus/></Button>
-       </Link>
+
 
        <br></br>
     </Container>

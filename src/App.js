@@ -8,6 +8,7 @@ import UpdateForm from './pages/UpdateForm';
 import { SongProvider } from './context/SongContext'; 
 import {  useState } from "react";
 
+
 function App() { 
   const [refresh, setRefresh] = useState(0);
 
@@ -27,9 +28,9 @@ function App() {
         
         <Route exact path='/' element={
           <>
-
+       
        <SongStats refreshData={refreshData} />
-
+      
       <SongList key={refresh} refreshData={refreshData}/>
           </>
         }>
