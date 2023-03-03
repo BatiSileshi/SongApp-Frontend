@@ -14,11 +14,9 @@ function SongList() {
     if (!song || song.length === 0){
         return <Container><p>No song yet</p></Container>
     }
-
-
   return (
     <div className='song-list'>
-
+ 
       <AnimatePresence>
       {song.map((item) => (
         <motion.div 

@@ -68,7 +68,7 @@ function SongForm() {
     }
 
     const handleSongAlbumChange = (e)=> {
-        if (album === '' || album.length >= 20){
+        if (album.length >= 20){
             setBtnDisabled(true)
             setMessage('Album name must be less 20 characters.')
 

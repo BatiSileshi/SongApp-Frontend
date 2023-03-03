@@ -202,7 +202,7 @@ function SongForm() {
     <Box width={1} px={2} mt={3}>
     
     {songEdit.edit && songEdit.item.cover_image && (    
-    <Image src={`/static/images/${songEdit.item.cover_image}`} alt={songEdit.item.cover_image} /> 
+    <Image src={`${songEdit.item.cover_image}`} alt={songEdit.item.cover_image} /> 
   )}   
     
      <Label htmlFor="cover_image">Cover Image</Label>

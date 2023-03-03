@@ -54,7 +54,7 @@ const SingleSong = ({item}) => {
       </Link>
       
       <div> 
-    <Image src={`static/images/${item.cover_image}`} alt='Cover Image of the song will be shown here' />
+    <Image src={`${item.cover_image}`} alt='Cover Image of the song will be shown here' />
       </div> 
 
   <Heading  fontSize={4} paddingBottom={2} paddingLeft={2}   css={{
