@@ -10,7 +10,6 @@ import styled from '@emotion/styled'
 const Button = styled.button`
    margin-left: 200px;
    float: right;
- 
 ` 
 
 
