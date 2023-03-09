@@ -16,7 +16,7 @@ import { createContext, useState, useEffect
 
       useEffect(() => {
         const fetchSong = async () => {
-            const response = await fetch('/api/songs/');
+            const response = await fetch('https://baty.pythonanywhere.com/api/songs/');
             const data = await response.json();
             setSong(data);
         };
@@ -28,7 +28,7 @@ import { createContext, useState, useEffect
 
 
     const addSong = async (formData) => {
-        const response = await fetch('/api/songs/add/', {
+        const response = await fetch('https://baty.pythonanywhere.com/api/songs/add/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ import { createContext, useState, useEffect
     const deleteSong = async(id) => {
         if(window.confirm('Are you sure you want to delete?')){
 
-          await fetch(`/api/songs/${id}/delete/`,
+          await fetch(`https://baty.pythonanywhere.com/api/songs/${id}/delete/`,
           {method: 'DELETE'}
           )
           setSong(song.filter((item) => item.id !== id));
@@ -56,7 +56,7 @@ import { createContext, useState, useEffect
     //update song 
     const updateSong = async(id, updItem) => {
 
-        const response = await fetch (`/api/songs/${id}/update/`, {
+        const response = await fetch (`https://baty.pythonanywhere.com/api/songs/${id}/update/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
